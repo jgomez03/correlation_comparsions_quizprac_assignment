@@ -1,5 +1,6 @@
-###Differences between correlations
-##comparing correlations within a published paper - no access to the data
+####Differences between correlations
+
+###COMPARING CORRELATIONS
 #comparing correlations without access to data: cocor.dep.groups.overlap
 
 library(tidyverse)
@@ -23,3 +24,23 @@ cocor.dep.groups.overlap (.83, .16, .19, 30, alternative = "two.sided",
 cocor.dep.groups.nonoverlap (.83, .38, .59, .16, .67, .19, 30, alternative = "two.sided",
                           test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, 
                           data.name = NULL, var.labels = NULL, return.htest = FALSE)
+
+###REPLICATION ISSUES
+##Question 3
+#replication evaluating rates-privileges correlation (r=.43)
+library(predictionInterval)
+pi.r(r=.43,n=30,rep.n=100)
+
+
+##Question 4
+#Trying different replication sizes to see how they effect the PI
+pi.r(r=.43,n=30,rep.n=1000) #width = .61
+pi.r(r=.43,n=30,rep.n=10000) #same width 
+
+##Question 5
+#Comparing indepedant correlations
+#(r1.jk = .43, r2.hm = .10)
+?cocor.indep.groups
+cocor.indep.groups(.43, .10, 30, 10000, alternative = "two.sided",
+                             test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, 
+                             data.name = NULL, var.labels = NULL, return.htest = FALSE)
